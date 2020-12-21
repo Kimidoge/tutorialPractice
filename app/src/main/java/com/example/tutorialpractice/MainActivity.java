@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
             notifyDataSetChanged();
         }
 
-        class MyViewHolder extends RecyclerView.ViewHolder {
+        class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
             public TextView textView;
             public TextView textView2;
             public ImageView imageView;
@@ -89,6 +90,20 @@ public class MainActivity extends AppCompatActivity {
                 textView = itemView.findViewById(R.id.versiontitle);
                 textView2 = itemView.findViewById(R.id.versionnumber);
                 imageView = itemView.findViewById(R.id.icon);
+
+                itemView.setOnClickListener(this);
+
+
+            }
+
+            @Override
+            public void onClick(View v) {
+
+                String name = elements.get(getAdapterPosition()).getName();
+                Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
+                intent.putExtra("name", name);
+                startActivity(intent);
+
 
 
             }
